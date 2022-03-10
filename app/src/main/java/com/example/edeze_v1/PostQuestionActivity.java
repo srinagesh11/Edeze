@@ -192,13 +192,13 @@ public class PostQuestionActivity extends AppCompatActivity implements AdapterVi
                     return;
                 }
                 System.out.println("mauth.getauthid : " + mAuth.getCurrentUser().toString());
-                if(!(user.authid.equals(mAuth.getCurrentUser().toString()))) {
+                if(!(user.id.equals(mAuth.getCurrentUser().getUid()))) {
                     OkHttpClient client = new OkHttpClient();
                     MediaType mediaType = MediaType.parse("application/json");
                     JSONObject json = new JSONObject();
                     JSONObject notification = new JSONObject();
                     try {
-                        notification.put("body", "Your question has been answered");
+                        notification.put("body", "A new question has been posted");
                         notification.put("title", "Edeze Notification");
                         json.put("to", user.token);
                         json.put("notification", notification );

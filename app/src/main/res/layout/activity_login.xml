@@ -81,6 +81,19 @@
             android:layout_marginEnd="80dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginFingerprintButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login with fingerprint"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@drawable/radius_main_color"
+                android:layout_marginBottom="10dp"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/loginEmailButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,44 +104,6 @@
                 android:layout_marginBottom="10dp"
                 android:textAllCaps="false"
                 android:onClick="loginEmailClick"
-                />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/loginTwitterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login with twitter"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:background="@drawable/radius_twitter_blue"
-                android:layout_marginBottom="10dp"
-                android:textAllCaps="false"
-                android:onClick="loginSSO"
-                />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/loginFacebookButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login with facebook"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:background="@drawable/radius_facebook_blue"
-                android:layout_marginBottom="10dp"
-                android:textAllCaps="false"
-                android:onClick="loginSSO"
-                />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/loginGoogleButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login with google"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:background="@drawable/radius_red"
-                android:textAllCaps="false"
-                android:onClick="loginSSO"
                 />
 
         </LinearLayout>

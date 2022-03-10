@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.google.gms:google-services:4.3.10'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.gms:play-services-location:11.0.2'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
@@ -50,6 +52,7 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.5.0'
     implementation 'com.google.guava:guava:29.0-android'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation "androidx.biometric:biometric:1.1.0"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

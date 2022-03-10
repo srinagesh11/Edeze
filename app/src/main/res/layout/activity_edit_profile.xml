@@ -146,17 +146,6 @@
                             android:contentDescription="@string/profile_photoDescription"
                             android:gravity="end"
                             android:src="@drawable/profile_icon_2" />
-                        <Button
-                            android:id="@+id/edit_profilePic"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:autofillHints="40dp"
-                            android:gravity="start|center_vertical"
-                            android:text="Edit Profile Pics"
-                            android:textSize="5sp"
-                            android:layout_marginBottom="2dp"
-                            android:onClick="personalInfoClick"
-                            />
 
                     </LinearLayout>
 
@@ -168,16 +157,6 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:layout_margin="5dp"
-                        android:text="Answered: 44 Questions"
-                        android:textColor="@color/white"
-                        android:textSize="8pt"
-                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -279,49 +258,6 @@
 
 
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/more_questions"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:gravity="start"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="Personal Information and Settings:"
-                    android:textColor="@color/main_color_DARK"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="Switch to Educator Account"
-                    android:textColor="@color/main_color_DARK"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="Password by Email Settings:"
-                    android:textColor="@color/main_color_DARK"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 

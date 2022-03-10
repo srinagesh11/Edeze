@@ -1,47 +1,50 @@
 package com.example.edeze_v1;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-// db
-public class ProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    private static final String TAG = "ProfilePageActivity";
+public class PersonalInformationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private static final String TAG = "PersonalInformationActivity";
     private FirebaseAuth mAuth;
-    TextView tv_name;
-    Button buttonInfo, buttonPostedQ, buttonFaveQ, buttonTutors;
     String[] navbar_temp_array;
+    TextView tv_ProfInfo_FirstLast,tv_study,tv_tutor;
+
+    String result_from_edit_name,result_from_edit_SubjStudy,result_from_edit_SubjTutor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "On Create");
-        // set layout
-        setContentView(R.layout.activity_profile_page);
+        Log.i(TAG,"On Create");
+        setContentView(R.layout.activity_personal_info);
 
-        // set UI elements
+        tv_ProfInfo_FirstLast = findViewById(R.id.tv_profile_name);
+        tv_study = findViewById(R.id.tv_info_page_study);
+        tv_tutor = findViewById(R.id.tv_info_page_tutor);
 
-        buttonInfo = findViewById(R.id.personalinfobutton);
-        buttonPostedQ = findViewById(R.id.postedquestionsbutton);
-//        buttonFaveQ = findViewById(R.id.favoritequestionsbutton);
-        buttonTutors = findViewById(R.id.tutorsbutton);
+        //set up toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //remove title from action bar
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle("");
@@ -55,10 +58,30 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.navbar_array, android.R.layout.simple_spinner_item);
         dropdown.setAdapter(adapter);
 
-        tv_name = findViewById(R.id.tv_email_display);
+//        result_from_edit_name = EditProfileActivity.getActivityInstance().getNameStr();
+//        result_from_edit_SubjStudy = EditProfileActivity.getActivityInstance().getSubjIStudyStr();
+//        result_from_edit_SubjTutor = EditProfileActivity.getActivityInstance().getSubjITutorStr();
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        TextView tv_name = findViewById(R.id.tv_profile_name);
         tv_name.setText(currentUser.getEmail());
+
+        if(savedInstanceState==null){
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                return;
+            } else {
+                result_from_edit_name = extras.getString("name");
+                result_from_edit_SubjStudy = extras.getString("studySubj");
+                result_from_edit_SubjTutor = extras.getString("tutorSubj");
+
+                //update the tv with the new strings IF there was an update.
+                tv_ProfInfo_FirstLast.setText(result_from_edit_name);
+                tv_study.setText(result_from_edit_SubjStudy);
+                tv_tutor.setText(result_from_edit_SubjTutor);
+            }
+        }
 
     }
 
@@ -89,35 +112,13 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         Log.i(TAG,"On Destroy");
     }
 
-    public void tutorsClick(View view) {
-        Intent intent = new Intent(this, FindTutorActivity.class);
-        startActivity(intent);
-    }
-
-    public void postedQuestionsClick(View view) {
-        Intent intent = new Intent(this, QAActivity.class);
-        startActivity(intent);
-    }
-
-    public void personalInfoClick(View view) {
-        Intent intent = new Intent(this, PersonalInformationActivity.class);
-        startActivity(intent);
-    }
-
-    public void toolbarProfileClick(View view) {
-        // go to log in page
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-
-    }
-
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
         Context context = getApplicationContext();
         CharSequence text = navbar_temp_array[pos];
-
         if (text.toString().equals("Profile")){
-            //do nothing; we are at profile
+            Intent intent = new Intent(this,ProfileActivity.class);
+            startActivity(intent);
         }
         else if(text.toString().equals("Settings")){
             Intent intent = new Intent(this, EditProfileActivity.class);
@@ -138,12 +139,14 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
-    public void editProfileClick(View view) {
-        Intent intent = new Intent(this, EditProfileActivity.class);
+    public void toolbarProfileClick(View view) {
+        // go to log in page
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
+
     }
 }

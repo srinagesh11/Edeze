@@ -177,17 +177,7 @@
                         android:text="Tutor 7"
                         android:layout_marginBottom="2dp"
                         />
-                    <Button
-                        android:id="@+id/tutor8button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:autofillHints=""
-                        android:gravity="center_vertical"
-                        android:text="Tutor 8"
-                        android:layout_marginBottom="2dp"
-                        />
+
 
                 </LinearLayout>
 

@@ -23,12 +23,13 @@ import java.util.Collections;
 import androidx.appcompat.widget.Toolbar;
 
 public class EditProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
+    static EditProfileActivity INSTANCE;
     private static final String TAG = "EditProfile";
     String[] navbar_temp_array;
     EditText et_editProfile_firstName,et_editProfilelastName,et_schoolName;
     String update_firstName_str,update_lastName_str;
     Spinner spinner_pronoun,spinner_learning,spinner_tutoring;
+    String resultIStudy,resultITutor,resultName="";
 
     TextView tv_dropdown_study,tv_dropdown_tutor;
     boolean[] selectedSubjStudy,selectedSubjTutor;
@@ -38,11 +39,28 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     String[] subjITutorArray = {"Math","English","Writing","Foreign Language","History","Sciences","Art","Music"};
 
 
+
+    public static EditProfileActivity getActivityInstance(){
+        return INSTANCE;
+    }
+
+    public String getSubjIStudyStr(){
+       return this.resultIStudy;
+    }
+
+    public String getSubjITutorStr(){
+        return this.resultITutor;
+    }
+
+    public String getNameStr(){
+        return this.resultName;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG,"On Create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        INSTANCE = this;
 
         //set up toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -84,6 +102,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         tv_dropdown_study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String result;
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
                 builder.setTitle("Select Subjects You Study");
                 builder.setCancelable(false);
@@ -105,7 +124,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                         for (int j = 0; j<subjIStudyList.size();j++){
                             stringBuilder.append(subjIStudyArray[subjIStudyList.get(j)]);
                             if (j != subjIStudyList.size() - 1) {
-                                stringBuilder.append(",");
+                                stringBuilder.append(", ");
+
                             }
                         }
                         tv_dropdown_study.setText(stringBuilder.toString());
@@ -166,6 +186,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     }
                 });
                 builder.show();
+//                resultITutor = builder.toString();
             }
         });
     }
@@ -195,8 +216,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         super.onDestroy();
         Log.i(TAG,"On Destroy");
     }
-    public void personalInfoClick(View view) {
-    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -239,7 +259,18 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         update_firstName_str = et_editProfile_firstName.getText().toString();
         update_lastName_str = et_editProfilelastName.getText().toString();
 
-        updateProfileMethod(update_firstName_str,update_lastName_str,"","","");
+        String st1 = tv_dropdown_study.getText().toString();
+        String st2 = tv_dropdown_tutor.getText().toString();
+        resultIStudy = st1.replace(", ","\n");
+        resultITutor = st2.replace(", ","\n");
+
+        resultName = update_firstName_str.concat(" "+update_lastName_str);
+        Intent intent = new Intent(this, PersonalInformationActivity.class);
+        intent.putExtra("name",resultName);
+        intent.putExtra("studySubj",resultIStudy);
+        intent.putExtra("tutorSubj",resultITutor);
+        startActivity(intent);
+        //updateProfileMethod(update_firstName_str,update_lastName_str,"","","");
     }
 
     void updateProfileMethod(String first, String last, String pronoun, String study, String tutor){

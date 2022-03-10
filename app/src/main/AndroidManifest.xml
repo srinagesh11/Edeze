@@ -4,6 +4,7 @@
     package="com.example.edeze_v1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +33,10 @@
             android:theme="@style/Theme.Edeze_v1.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Edeze_v1.NoActionBar" />
+        <activity
+            android:name=".PersonalInformationActivity"
             android:exported="false"
             android:theme="@style/Theme.Edeze_v1.NoActionBar" />
         <activity
@@ -67,10 +72,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAy87_KpNj9gOG_ySNv868ppdBuWn1vsTU" />
+            android:value="AIzaSyDofNZzNPiFIRUKHg4pcc6lOkUNZ7n-7tE" />
 
     </application>
 

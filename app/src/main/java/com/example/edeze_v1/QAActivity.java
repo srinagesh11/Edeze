@@ -77,8 +77,7 @@ public class QAActivity extends AppCompatActivity implements AdapterView.OnItemS
         userString = currentUser.toString();
         System.out.println("---CURRENT USER---: " + userString);
         Map<String, Object> values = new HashMap<>();
-        String[] strTokens=userString.split("\\.");
-        String next_user_id = strTokens[strTokens.length-1];
+        String next_user_id = mAuth.getCurrentUser().getUid();
         values.put("authid", userString);
         values.put("id", next_user_id);
         values.put("latitude", 0.0);
@@ -265,7 +264,7 @@ public class QAActivity extends AppCompatActivity implements AdapterView.OnItemS
                         values.put("token", token);
                         System.out.println("token : " + token);
                         Log.d(TAG, msg);
-                        userRef.child("user_"+next_user_id).setValue(values);
+                        userRef.child("user_"+mAuth.getCurrentUser().getUid()).setValue(values);
                     }
                 });
     }
